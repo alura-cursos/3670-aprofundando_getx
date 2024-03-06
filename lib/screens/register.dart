@@ -10,7 +10,7 @@ import 'package:vidflow/utils/images.dart';
 class Register extends StatelessWidget {
   Register({super.key});
   
-  final RegisterController registerController = Get.put(RegisterController());
+  final RegisterController registerController = Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
