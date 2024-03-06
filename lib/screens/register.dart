@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vidflow/components/custom_button.dart';
 import 'package:vidflow/components/custom_field.dart';
+import 'package:vidflow/controllers/register_controller.dart';
 import 'package:vidflow/screens/login.dart';
 import 'package:vidflow/utils/colors.dart';
 import 'package:vidflow/utils/images.dart';
@@ -9,9 +10,7 @@ import 'package:vidflow/utils/images.dart';
 class Register extends StatelessWidget {
   Register({super.key});
   
-  final TextEditingController textUserController = TextEditingController();
-  final TextEditingController textEmailController = TextEditingController();
-  final TextEditingController textPasswordController = TextEditingController();
+  final RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +58,17 @@ class Register extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 32.0),
                       child: CustomField(
-                          label: "Nome", textController: textUserController),
+                          label: "Nome", textController: registerController.textUserController),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 32.0),
                       child: CustomField(
-                          label: "Email", textController: textEmailController),
+                          label: "Email", textController: registerController.textEmailController),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 32.0),
                       child: CustomField(
-                          label: "Senha", textController: textPasswordController),
+                          label: "Senha", textController: registerController.textPasswordController),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +76,10 @@ class Register extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 32.0),
                           child: CustomButton(
-                              onTap: (){}, text: "Cadastrar", icon: Icons.login),
+                              onTap: (){
+                                registerController.register();
+                                Get.offAll(() => Login());
+                              }, text: "Cadastrar", icon: Icons.login),
                         ),
                         
                       ],

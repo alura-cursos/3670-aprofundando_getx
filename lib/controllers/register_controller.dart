@@ -25,6 +25,9 @@ class RegisterController extends GetxController {
       if(response.statusCode == 201) {
         final json = jsonDecode(response.body);
         print(json);
+        textUserController.clear();
+        textEmailController.clear();
+        textPasswordController.clear();
         AppSnacks.getConfirmRegistration(true);
       } else {
         AppSnacks.getConfirmRegistration(false);
