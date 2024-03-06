@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:vidflow/components/custom_button.dart';
 import 'package:vidflow/components/custom_field.dart';
 import 'package:vidflow/controllers/register_controller.dart';
-import 'package:vidflow/screens/dashboard.dart';
 import 'package:vidflow/screens/register.dart';
 import 'package:vidflow/utils/colors.dart';
 import 'package:vidflow/utils/images.dart';
