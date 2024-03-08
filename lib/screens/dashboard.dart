@@ -14,12 +14,9 @@ class Dashboard extends StatelessWidget {
   Dashboard({super.key});
 
   final VideosController videosController = Get.put(VideosController());
-  final storageContainer = GetStorage();
 
   @override
   Widget build(BuildContext context) {
-    storageContainer.erase();
-    print(storageContainer.read("chave"));
     return Scaffold(
       backgroundColor: AppColors.blueVoid,
       body: Padding(

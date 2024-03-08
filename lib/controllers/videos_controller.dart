@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:vidflow/model/video.dart';
 import 'package:vidflow/screens/dashboard.dart';
 import 'package:vidflow/services/videos_api.dart';
@@ -16,13 +17,15 @@ class VideosController extends GetxController {
   final RxList<Video> videos = <Video>[].obs;
   final VideosApi videosApi = Get.put(VideosApi());
 
+  final session = GetStorage().read("session");
+
   final TextEditingController textVideoTitleController = TextEditingController();
   final TextEditingController textVideoThumbNailController = TextEditingController();
 
   Future<void> getAllFromUser() async {
     try {
       videoLoading(true);
-      Response<List<Video>> response = await videosApi.getAllFromUser(2);
+      Response<List<Video>> response = await videosApi.getAllFromUser(session["user"]["id"]);
       if(response.statusCode == 200) {
         videos(response.body);
       }
@@ -32,9 +35,9 @@ class VideosController extends GetxController {
   }
 
   Future<void> create() async {
-    final Video video = Video(thumbURL: textVideoThumbNailController.text, title: textVideoTitleController.text, userId: 2);
+    final Video video = Video(thumbURL: textVideoThumbNailController.text, title: textVideoTitleController.text, userId: session['user']['id']);
     try {
-      Response<void> response = await videosApi.create(video, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGhldXNAZW1haWwuY29tIiwiaWF0IjoxNzA5OTA5ODE1LCJleHAiOjE3MDk5MTM0MTUsInN1YiI6IjIifQ.HnITLXphn0BLsepoQVvmFwgeCaE5ck4-uwnj9PNDkkw");
+      Response<void> response = await videosApi.create(video, session['accessToken']);
       if(response.statusCode == 201) {
         AppSnacks.getSuccessUpload();
         Get.offAll(() => Dashboard());
