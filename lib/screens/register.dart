@@ -87,7 +87,7 @@ class Register extends StatelessWidget {
                     Column(children: <Widget>[
                       const Text("Já possui uma conta?", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
                         TextButton(
-                          onPressed: () => Get.to(() => Login()),
+                          onPressed: () => Get.to(() => Login(), transition: Transition.leftToRight),
                           child: Text(
                             "Faça seu login!",
                             style: TextStyle(

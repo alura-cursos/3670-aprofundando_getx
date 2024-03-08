@@ -75,7 +75,7 @@ class Login extends StatelessWidget {
                     Column(children: <Widget>[
                       const Text("Ainda não tem conta?", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
                         TextButton(
-                          onPressed: () => Get.to(() => Register()),
+                          onPressed: () => Get.to(() => Register(), transition: Transition.cupertino),
                           child: Text(
                             "Faça seu cadastro!",
                             style: TextStyle(
