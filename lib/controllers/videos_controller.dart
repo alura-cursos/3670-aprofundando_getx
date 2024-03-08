@@ -6,6 +6,12 @@ import 'package:vidflow/services/videos_api.dart';
 import 'package:vidflow/utils/snackbars.dart';
 
 class VideosController extends GetxController {
+  @override
+  void onInit() {
+    super.onInit();
+    getAllFromUser();
+  }
+
   final videoLoading = true.obs;
   final RxList<Video> videos = <Video>[].obs;
   final VideosApi videosApi = Get.put(VideosApi());

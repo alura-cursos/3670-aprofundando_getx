@@ -3,21 +3,24 @@ import 'package:get/get.dart';
 import 'package:vidflow/components/custom_button.dart';
 import 'package:vidflow/components/header.dart';
 import 'package:vidflow/components/video_card.dart';
+import 'package:vidflow/controllers/videos_controller.dart';
 import 'package:vidflow/model/video.dart';
 import 'package:vidflow/screens/upload.dart';
 import 'package:vidflow/utils/colors.dart';
 import 'package:vidflow/utils/images.dart';
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({super.key});
+  Dashboard({super.key});
+
+  final VideosController videosController = Get.put(VideosController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blueVoid,
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.fromLTRB(16, 64, 16, 28),
-        child: _EmptyDashboard(),
+        child: Obx(() => videosController.videoLoading.value ? Center(child: CircularProgressIndicator(),) : videosController.videos.isEmpty ? _EmptyDashboard() : _FullDashboard(videosList: videosController.videos)),
       ),
     );
   }
